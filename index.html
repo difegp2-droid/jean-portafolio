@@ -1,0 +1,398 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prototipos | Desarrollador Web</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="/style.css" />
+</head>
+
+<body>
+  <!-- Audio Element -->
+  <audio id="ambient-audio" loop src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=lofi-study-112191.mp3"></audio>
+
+  <!-- Noise overlay -->
+  <div class="noise-overlay"></div>
+  <!-- Subtle glow -->
+  <div class="glow glow-1"></div>
+
+  <!-- Custom Cursor -->
+  <div id="cursor-dot"></div>
+  <div id="cursor-ring"></div>
+
+  <div id="app">
+    <!-- Minimal Navbar -->
+    <nav class="bento-nav reveal">
+      <div class="logo">J.<span>A</span></div>
+      <div class="nav-actions">
+        <button id="audio-toggle" class="nav-btn vibe-btn">🎵 Vibe: OFF</button>
+        <a href="#" class="nav-btn outline">CV ↓</a>
+        <a href="https://github.com/jeanfa1" target="_blank" class="nav-btn">GitHub ↗</a>
+      </div>
+    </nav>
+
+    <!-- Bento Box Layout -->
+    <main class="bento-grid">
+
+      <!-- Bento Item: Hero (Large) -->
+      <section class="bento-card hero-card reveal col-span-2 row-span-2 project-card clickable"
+        data-target="modal-about">
+        <!-- Three.js Canvas Container -->
+        <div id="canvas-container"></div>
+
+        <div class="card-content">
+          <span class="badge">Estudiante en SENATI & Frontend Dev</span>
+          <h1 class="title">Hola, soy<br><span>Jean</span><br>Avalos.</h1>
+          <p class="subtitle">Especialista en la creación de experiencias digitales de alto impacto. Transformo código en interfaces dinámicas, intuitivas y con un diseño visual impecable.</p>
+          <div class="hero-footer">
+            <div class="status-indicator">
+              <span class="dot"></span> Disponible para nuevos retos
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Bento Item: About/Skills -->
+      <section class="bento-card tech-card reveal project-card clickable" data-target="modal-tech">
+        <div class="card-content">
+          <h3>Tech Stack</h3>
+          <p>Construyendo con las herramientas modernas del ecosistema web.</p>
+          <div class="tech-tags">
+            <span class="t-tag">Angular</span>
+            <span class="t-tag">Flutter</span>
+            <span class="t-tag">Firebase</span>
+            <span class="t-tag">CSS Grid</span>
+            <span class="t-tag">HTML5</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Bento Item: Services -->
+      <section class="bento-card reveal project-card">
+        <div class="card-content">
+          <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem;">Mis Especialidades</h3>
+          <ul style="list-style: none; padding: 0; color: var(--color-text-muted); font-size: 0.95rem; line-height: 1.8;">
+            <li>✦ Aplicaciones Web (SPA)</li>
+            <li>✦ Apps Móviles (Flutter)</li>
+            <li>✦ E-commerce & Landings</li>
+            <li>✦ Diseño UI/UX Avanzado</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Bento Item: Mis Proyectos Gallery -->
+      <section class="bento-card project-card reveal col-span-2 clickable" data-target="modal-gallery">
+        <div class="card-content horizontal">
+          <div class="project-info-side">
+            <h3 style="font-size: 2.2rem; line-height: 1.1; margin-bottom: 0.5rem;">Mis Proyectos <span style="color: var(--color-text-muted); font-weight: 300; font-size: 1.5rem;">(12+)</span></h3>
+            <p>Explora mi galería completa de prototipos y páginas web.</p>
+            <div class="card-actions" style="margin-top: 1.5rem;">
+              <span class="action-btn">Ver Galería ↗</span>
+            </div>
+          </div>
+          <div class="side-img">
+            <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80&w=400" alt="Galería de Proyectos" />
+          </div>
+        </div>
+      </section>
+
+      <!-- Bento Item: Contact -->
+      <section class="bento-card contact-card reveal project-card">
+        <div class="card-content center-content">
+          <h3>¿Hablamos?</h3>
+          <a href="https://wa.me/51912453016?text=Hola%20Jean,%20vi%20tu%20portafolio%20y%20me%20gustar%C3%ADa%20contactarte." target="_blank" class="big-link">Escribir al WhatsApp ↗</a>
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="minimal-footer">
+      <p>Diseñado con precisión. © 2026</p>
+    </footer>
+  </div>
+
+  <!-- Modal System -->
+  <div id="modal-system">
+    <div class="modal-backdrop"></div>
+    <button class="modal-close-btn">Cerrar ✕</button>
+
+    <div class="modal-container">
+      <!-- Pages -->
+      <div class="modal-page" id="modal-about">
+        <h2 class="fade-in-stagger delay-1">Sobre Mí</h2>
+        <div class="fade-in-stagger delay-2" style="display: flex; gap: 2rem; align-items: flex-start; margin-top: 2rem; flex-wrap: wrap;">
+          <div style="flex: 1; min-width: 300px;">
+            <p>Soy <strong>Jean Avalos Aguirre</strong>, un desarrollador y diseñador de interfaces basado en Perú. Mi motor principal es la innovación: me fascina tomar una idea abstracta y convertirla en una experiencia digital envolvente, funcional y visualmente espectacular.</p>
+            <p>Actualmente curso mi <strong>6to ciclo en SENATI</strong>, donde he perfeccionado mis bases técnicas de ingeniería de software. Sin embargo, mi verdadero valor radica en el mundo real: he forjado mi experiencia a través de <strong>dos roles profesionales como practicante</strong>, desarrollando soluciones tangibles para clientes y asumiendo la responsabilidad de crear productos digitales que superan expectativas.</p>
+            <p>No soy solo un programador que escribe código; soy un arquitecto digital que diseña experiencias. Mi portafolio es la prueba palpable de mi capacidad técnica, mi lógica de programación y mi obsesión por los detalles estéticos.</p>
+            <h4 style="margin-top: 2rem; margin-bottom: 1rem; color: #fff; font-size: 1.2rem;">Mi ADN Tecnológico</h4>
+            <ul style="color: var(--color-text-muted); padding-left: 1.5rem; line-height: 1.8; font-size: 1.1rem;">
+              <li><strong>Desarrollo Web (Angular):</strong> Arquitecturas limpias y escalables para Single Page Applications de alto rendimiento.</li>
+              <li><strong>Ecosistema Móvil (Flutter):</strong> Diseño multiplataforma que se siente y comporta como una app nativa premium.</li>
+              <li><strong>Infraestructura (Firebase):</strong> Integración de bases de datos ágiles para potenciar la lógica del negocio.</li>
+            </ul>
+          </div>
+          <div style="width: 250px; height: 320px; border-radius: 16px; border: 1px solid var(--glass-border); overflow: hidden; flex-shrink: 0;">
+            <img src="https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&q=80&w=400" alt="Sobre mi perfil" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-page" id="modal-tech">
+        <h2 class="fade-in-stagger delay-1">Tech Stack Detallado</h2>
+        <p class="fade-in-stagger delay-2">Estas son las herramientas que estoy dominando actualmente para construir la web del futuro.</p>
+        <div class="fade-in-stagger delay-3" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 2rem;">
+          <div style="background: rgba(255,255,255,0.03); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--glass-border);">
+            <h4 style="color: #fff; margin-bottom: 0.5rem;">Angular</h4>
+            <p style="font-size: 0.95rem; margin: 0;">Desarrollo robusto de Single Page Applications, estructuración modular y alto rendimiento en el navegador.</p>
+          </div>
+          <div style="background: rgba(255,255,255,0.03); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--glass-border);">
+            <h4 style="color: #fff; margin-bottom: 0.5rem;">Flutter</h4>
+            <p style="font-size: 0.95rem; margin: 0;">Creación de aplicaciones y diseño UI responsivo, llevando la misma experiencia atractiva a dispositivos móviles.</p>
+          </div>
+          <div style="background: rgba(255,255,255,0.03); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--glass-border);">
+            <h4 style="color: #fff; margin-bottom: 0.5rem;">Firebase</h4>
+            <p style="font-size: 0.95rem; margin: 0;">Manejo de bases de datos y servicios en la nube para potenciar el backend de mis aplicaciones.</p>
+          </div>
+          <div style="background: rgba(255,255,255,0.03); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--glass-border);">
+            <h4 style="color: #fff; margin-bottom: 0.5rem;">Modern HTML & CSS</h4>
+            <p style="font-size: 0.95rem; margin: 0;">Maquetación estructural y diseño visual utilizando Flexbox, Grid y animaciones personalizadas.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-page" id="modal-gallery">
+        <h2 class="fade-in-stagger delay-1">Galería de Proyectos</h2>
+        <p class="fade-in-stagger delay-2">Haz clic en cualquier proyecto para ver sus detalles y acceder a la demo.</p>
+        <div class="gallery-grid fade-in-stagger delay-3" style="margin-top: 2rem;">
+          <div class="gallery-card clickable" data-target="modal-venta">
+            <div class="g-thumb">
+              <img src="https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?auto=format&fit=crop&q=80&w=400" alt="Aura Kicks" />
+            </div>
+            <div class="g-info">
+              <h4>Aura Kicks (Ventas)</h4>
+              <span>Ver detalles →</span>
+            </div>
+          </div>
+          <!-- Proyecto 2 -->
+          <div class="gallery-card clickable" data-target="modal-compuelectric">
+            <div class="g-thumb">
+              <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=400" alt="CompuElectric" />
+            </div>
+            <div class="g-info">
+              <h4>CompuElectric</h4>
+              <span>Ver detalles →</span>
+            </div>
+          </div>
+          <!-- Proyecto 3 -->
+          <div class="gallery-card clickable" data-target="modal-luxeestate">
+            <div class="g-thumb">
+              <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&q=80&w=400" alt="LuxeEstate" />
+            </div>
+            <div class="g-info">
+              <h4>LuxeEstate</h4>
+              <span>Ver detalles →</span>
+            </div>
+          </div>
+          <!-- Proyecto 4 -->
+          <div class="gallery-card clickable" data-target="modal-dulcetierra">
+            <div class="g-thumb">
+              <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&q=80&w=400" alt="Dulce Tierra" />
+            </div>
+            <div class="g-info">
+              <h4>Dulce Tierra</h4>
+              <span>Ver detalles →</span>
+            </div>
+          </div>
+          <!-- Proyecto 5 -->
+          <div class="gallery-card clickable" data-target="modal-polleria">
+            <div class="g-thumb">
+              <img src="https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?auto=format&fit=crop&q=80&w=400" alt="Pollería Suárez" />
+            </div>
+            <div class="g-info">
+              <h4>Pollería Suárez</h4>
+              <span>Ver detalles →</span>
+            </div>
+          </div>
+          <!-- Proyecto 6 -->
+          <div class="gallery-card clickable" data-target="modal-origencafe">
+            <div class="g-thumb">
+              <img src="https://images.unsplash.com/photo-1497935586351-b67a49e012bf?auto=format&fit=crop&q=80&w=400" alt="Origen Café" />
+            </div>
+            <div class="g-info">
+              <h4>Origen Café</h4>
+              <span>Ver detalles →</span>
+            </div>
+          </div>
+          <!-- Proyecto 7 -->
+          <div class="gallery-card clickable" data-target="modal-trabajo">
+            <div class="g-thumb">
+              <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&q=80&w=400" alt="Portal de Empleos" />
+            </div>
+            <div class="g-info">
+              <h4>Portal Empleos</h4>
+              <span>Ver detalles →</span>
+            </div>
+          </div>
+          <!-- Proyecto 8 -->
+          <div class="gallery-card clickable" data-target="modal-pandemia">
+            <div class="g-thumb">
+              <img src="https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?auto=format&fit=crop&q=80&w=400" alt="Info Pandemia" />
+            </div>
+            <div class="g-info">
+              <h4>Info Pandemia</h4>
+              <span>Ver detalles →</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal: Venta -->
+      <div class="modal-page" id="modal-venta">
+        <button class="clickable back-btn fade-in-stagger delay-1" data-target="modal-gallery">← Volver a Galería</button>
+        <h2 class="fade-in-stagger delay-1">Aura Kicks - E-commerce Urbano</h2>
+        <div class="modal-hero-img fade-in-stagger delay-2">
+          <img src="https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?auto=format&fit=crop&q=80&w=800" alt="Aura Kicks Sneakers" />
+        </div>
+        <div class="fade-in-stagger delay-3">
+          <p>Landing page de alta conversión para "Aura Kicks", una tienda de zapatillas y estilo urbano. Diseño en Dark Mode con detalles en rojo neón que resaltan la exclusividad de los productos.</p>
+          <p><strong>Características:</strong> Catálogo de productos integrado, diseño responsivo y botones de llamadas a la acción (CTA) directos a WhatsApp para cerrar ventas rápidamente.</p>
+          <div style="margin-top: 2rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+            <a href="https://jeanfa0.github.io/venta/" target="_blank" class="action-btn" style="display: inline-block;">Ver Demo en Vivo ↗</a>
+            <a href="informes/informe_aura_kicks.md" download="Informe_Aura_Kicks.md" class="action-btn outline" style="display: inline-block;">📄 Descargar Informe</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal: CompuElectric -->
+      <div class="modal-page" id="modal-compuelectric">
+        <button class="clickable back-btn fade-in-stagger delay-1" data-target="modal-gallery">← Volver a Galería</button>
+        <h2 class="fade-in-stagger delay-1">CompuElectric</h2>
+        <div class="modal-hero-img fade-in-stagger delay-2">
+          <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=800" alt="CompuElectric" />
+        </div>
+        <div class="fade-in-stagger delay-3">
+          <p>Plataforma para un servicio técnico especializado en Lima. Ofrece reparación de laptops, PCs e impresoras, además de venta de componentes electrónicos y accesorios.</p>
+          <p><strong>Características:</strong> Integración de catálogo de productos, visualización de marcas de confianza (Samsung, HP, Lenovo) y un embudo de contacto veloz mediante WhatsApp para diagnósticos.</p>
+          <div style="margin-top: 2rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+            <a href="https://jeanfa0.github.io/compuelectric/" target="_blank" class="action-btn" style="display: inline-block;">Ver Demo en Vivo ↗</a>
+            <a href="informes/informe_compuelectric.md" download="Informe_CompuElectric.md" class="action-btn outline" style="display: inline-block;">📄 Descargar Informe</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal: LuxeEstate -->
+      <div class="modal-page" id="modal-luxeestate">
+        <button class="clickable back-btn fade-in-stagger delay-1" data-target="modal-gallery">← Volver a Galería</button>
+        <h2 class="fade-in-stagger delay-1">LuxeEstate</h2>
+        <div class="modal-hero-img fade-in-stagger delay-2">
+          <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&q=80&w=800" alt="LuxeEstate" />
+        </div>
+        <div class="fade-in-stagger delay-3">
+          <p>Plataforma de asesoría de bienes raíces premium orientada a la compra, venta o inversión en propiedades de lujo. Diseño corporativo, sofisticado y confiable.</p>
+          <p><strong>Desarrollo:</strong> Uso de meta-etiquetas avanzadas y Open Graph para optimización SEO y un rendimiento excepcional en la carga de activos visuales en alta resolución.</p>
+          <div style="margin-top: 2rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+            <a href="https://jeanfa0.github.io/luxeestate/" target="_blank" class="action-btn" style="display: inline-block;">Ver Demo en Vivo ↗</a>
+            <a href="informes/informe_luxeestate.md" download="Informe_LuxeEstate.md" class="action-btn outline" style="display: inline-block;">📄 Descargar Informe</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal: Dulce Tierra -->
+      <div class="modal-page" id="modal-dulcetierra">
+        <button class="clickable back-btn fade-in-stagger delay-1" data-target="modal-gallery">← Volver a Galería</button>
+        <h2 class="fade-in-stagger delay-1">Dulce Tierra</h2>
+        <div class="modal-hero-img fade-in-stagger delay-2">
+          <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&q=80&w=800" alt="Dulce Tierra" />
+        </div>
+        <div class="fade-in-stagger delay-3">
+          <p>Página web para marca de postres artesanales. Diseñada con una paleta de colores envolvente y cálida (crema, tonos tierra, terracota y salvia) que transmite confort.</p>
+          <p><strong>Diseño UI:</strong> Destaca por su elegante uso de tipografías clásicas (Playfair Display, Lora), texturas de ruido sutiles y decoraciones botánicas flotantes que elevan la identidad visual.</p>
+          <div style="margin-top: 2rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+            <a href="https://jeanfa0.github.io/dulcetierra/" target="_blank" class="action-btn" style="display: inline-block;">Ver Demo en Vivo ↗</a>
+            <a href="informes/informe_dulce_tierra.md" download="Informe_Dulce_Tierra.md" class="action-btn outline" style="display: inline-block;">📄 Descargar Informe</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal: Polleria Suarez -->
+      <div class="modal-page" id="modal-polleria">
+        <button class="clickable back-btn fade-in-stagger delay-1" data-target="modal-gallery">← Volver a Galería</button>
+        <h2 class="fade-in-stagger delay-1">Pollería Suárez</h2>
+        <div class="modal-hero-img fade-in-stagger delay-2">
+          <img src="https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?auto=format&fit=crop&q=80&w=800" alt="Pollería Suárez" />
+        </div>
+        <div class="fade-in-stagger delay-3">
+          <p>Aplicación web para un restaurante local ("Pollería Suárez"), desarrollada utilizando el framework de Angular como una SPA (Single Page Application).</p>
+          <p><strong>Rendimiento:</strong> Arquitectura moderna basada en componentes, optimización de hojas de estilo integradas y estructuración ágil de módulos para una navegación sin recargas.</p>
+          <div style="margin-top: 2rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+            <a href="https://jeanfa0.github.io/polleria-suarez/" target="_blank" class="action-btn" style="display: inline-block;">Ver Demo en Vivo ↗</a>
+            <a href="informes/informe_polleria_suarez.md" download="Informe_Polleria_Suarez.md" class="action-btn outline" style="display: inline-block;">📄 Descargar Informe</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal: Origen Cafe -->
+      <div class="modal-page" id="modal-origencafe">
+        <button class="clickable back-btn fade-in-stagger delay-1" data-target="modal-gallery">← Volver a Galería</button>
+        <h2 class="fade-in-stagger delay-1">Origen Café</h2>
+        <div class="modal-hero-img fade-in-stagger delay-2">
+          <img src="https://images.unsplash.com/photo-1497935586351-b67a49e012bf?auto=format&fit=crop&q=80&w=800" alt="Origen Café" />
+        </div>
+        <div class="fade-in-stagger delay-3">
+          <p>Página de "Specialty Coffee". Diseño inmersivo y minimalista que comunica la pureza y cultura del café de origen.</p>
+          <p><strong>Diseño UI:</strong> Estructura web moderna construida en Angular, haciendo un excelente uso de la familia tipográfica DM Sans en múltiples pesos (Light a SemiBold) para una legibilidad elegante y limpia.</p>
+          <div style="margin-top: 2rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+            <a href="https://jeanfa0.github.io/origencafe/" target="_blank" class="action-btn" style="display: inline-block;">Ver Demo en Vivo ↗</a>
+            <a href="informes/informe_origen_cafe.md" download="Informe_Origen_Cafe.md" class="action-btn outline" style="display: inline-block;">📄 Descargar Informe</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal: Trabajo -->
+      <div class="modal-page" id="modal-trabajo">
+        <button class="clickable back-btn fade-in-stagger delay-1" data-target="modal-gallery">← Volver a Galería</button>
+        <h2 class="fade-in-stagger delay-1">Portal de Empleos</h2>
+        <div class="modal-hero-img fade-in-stagger delay-2">
+          <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&q=80&w=800" alt="Trabajo" />
+        </div>
+        <div class="fade-in-stagger delay-3">
+          <p>Bolsa de trabajo ("MiAplicacion"), diseñada como un portal interactivo para conectar profesionales con vacantes activas en el mercado.</p>
+          <p><strong>Desarrollo:</strong> Plataforma robusta desarrollada con Angular para manejo de estado dinámico y estructuración de componentes interactivos con tipografía fluida.</p>
+          <div style="margin-top: 2rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+            <a href="https://jeanfa0.github.io/trabajo/" target="_blank" class="action-btn" style="display: inline-block;">Ver Demo en Vivo ↗</a>
+            <a href="informes/informe_portal_empleos.md" download="Informe_Portal_Empleos.md" class="action-btn outline" style="display: inline-block;">📄 Descargar Informe</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal: Pandemia -->
+      <div class="modal-page" id="modal-pandemia">
+        <button class="clickable back-btn fade-in-stagger delay-1" data-target="modal-gallery">← Volver a Galería</button>
+        <h2 class="fade-in-stagger delay-1">Info Pandemia</h2>
+        <div class="modal-hero-img fade-in-stagger delay-2">
+          <img src="https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?auto=format&fit=crop&q=80&w=800" alt="Pandemia" />
+        </div>
+        <div class="fade-in-stagger delay-3">
+          <p>Portal Nacional de Bienestar "VidaEnCasa", enfocado en dar información oficial, estadísticas y recomendaciones de salud durante la pandemia.</p>
+          <p><strong>Diseño UI:</strong> Interfaz tipo periodística o editorial con uso intensivo de CSS Grid, fuentes atractivas (DM Serif, Space Mono) y una potente paleta de colores crema (fondo), verde azulado, rojo y dorado.</p>
+          <div style="margin-top: 2rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+            <a href="https://jeanfa0.github.io/pandemia/" target="_blank" class="action-btn" style="display: inline-block;">Ver Demo en Vivo ↗</a>
+            <a href="informes/informe_info_pandemia.md" download="Informe_Info_Pandemia.md" class="action-btn outline" style="display: inline-block;">📄 Descargar Informe</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="/main.js"></script>
+</body>
+
+</html>
