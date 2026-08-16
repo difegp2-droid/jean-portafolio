@@ -8,14 +8,15 @@ const audioEl = document.getElementById('ambient-audio');
 let isPlaying = false;
 
 if (audioBtn && audioEl) {
+  const vibeText = audioBtn.querySelector('.vibe-text');
   audioBtn.addEventListener('click', () => {
     if (isPlaying) {
       audioEl.pause();
-      audioBtn.textContent = '🎵 Vibe: OFF';
+      if(vibeText) vibeText.textContent = 'Vibe: OFF';
       audioBtn.classList.remove('playing');
     } else {
       audioEl.play();
-      audioBtn.textContent = '🎵 Vibe: ON';
+      if(vibeText) vibeText.textContent = 'Vibe: ON';
       audioBtn.classList.add('playing');
     }
     isPlaying = !isPlaying;
@@ -232,3 +233,69 @@ if (!isTouchDevice()) {
     });
   });
 }
+
+// --- GITHUB TICKER LOGIC ---
+const fetchGitHubActivity = async () => {
+  const tickerEl = document.getElementById('github-ticker');
+  if (!tickerEl) return;
+  
+  try {
+    const res = await fetch('https://api.github.com/users/difegp2-droid/events/public');
+    const data = await res.json();
+    
+    // Buscar el último push event
+    const pushEvent = data.find(event => event.type === 'PushEvent' || event.type === 'CreateEvent');
+    
+    if (pushEvent) {
+      const repoName = pushEvent.repo.name.split('/')[1] || pushEvent.repo.name;
+      const date = new Date(pushEvent.created_at);
+      const now = new Date();
+      const diffHours = Math.floor((now - date) / (1000 * 60 * 60));
+      const diffDays = Math.floor(diffHours / 24);
+      
+      let timeAgo = '';
+      if (diffHours === 0) timeAgo = 'hace menos de una hora';
+      else if (diffHours < 24) timeAgo = `hace ${diffHours} hora${diffHours > 1 ? 's' : ''}`;
+      else timeAgo = `hace ${diffDays} día${diffDays > 1 ? 's' : ''}`;
+      
+      tickerEl.innerHTML = `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+        <span>Último commit: ${timeAgo} en <strong>${repoName}</strong></span>
+        <span class="activity-dot"></span>
+      `;
+      tickerEl.style.display = 'flex';
+    }
+  } catch (err) {
+    console.error('Error fetching GitHub activity:', err);
+  }
+};
+fetchGitHubActivity();
+
+// --- EASTER EGG LOGIC ---
+const logo = document.querySelector('.logo');
+let logoClicks = 0;
+let clickTimeout;
+
+if (logo) {
+  logo.addEventListener('click', () => {
+    logoClicks++;
+    clearTimeout(clickTimeout);
+    
+    if (logoClicks >= 5) {
+      document.body.classList.toggle('wireframe-mode');
+      logoClicks = 0;
+      console.log('%c [Modo Wireframe] ' + (document.body.classList.contains('wireframe-mode') ? 'Activado' : 'Desactivado'), 'color: #00ff88; font-weight: bold;');
+    } else {
+      clickTimeout = setTimeout(() => {
+        logoClicks = 0;
+      }, 1000); // Reset after 1 second of inactivity
+    }
+  });
+}
+
+// --- CONSOLE GREETING ---
+console.log(
+  "%c J.A - Web Developer %c\\n\\n¿Inspeccionando el código? ¡Me gusta tu curiosidad!\\nTodo está diseñado desde cero con mucho detalle.\\n\\n🚀 Disponible para nuevos retos.\\n📞 Contacto: wa.me/51912453016", 
+  "background: #00ff88; color: #000; font-size: 20px; font-weight: bold; padding: 5px 10px; border-radius: 4px;", 
+  "color: #00ff88; font-size: 14px;"
+);

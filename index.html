@@ -32,7 +32,10 @@
     <nav class="bento-nav reveal">
       <div class="logo">J.<span>A</span></div>
       <div class="nav-actions">
-        <button id="audio-toggle" class="nav-btn vibe-btn">🎵 Vibe: OFF</button>
+        <button id="audio-toggle" class="nav-btn vibe-btn">
+          🎵 <span class="vibe-text">Vibe: OFF</span>
+          <div class="eq-bars"><span></span><span></span><span></span><span></span></div>
+        </button>
         <a href="#" class="nav-btn outline">CV ↓</a>
         <a href="https://github.com/jeanfa1" target="_blank" class="nav-btn">GitHub ↗</a>
       </div>
@@ -55,6 +58,8 @@
             <div class="status-indicator">
               <span class="dot"></span> Disponible para nuevos retos
             </div>
+            <!-- Contenedor del Ticker de GitHub -->
+            <div id="github-ticker" class="github-ticker" style="display: none;"></div>
           </div>
         </div>
       </section>
@@ -258,6 +263,10 @@
       <div class="modal-page" id="modal-venta">
         <button class="clickable back-btn fade-in-stagger delay-1" data-target="modal-gallery">← Volver a Galería</button>
         <h2 class="fade-in-stagger delay-1">Aura Kicks - E-commerce Urbano</h2>
+        <div class="fade-in-stagger delay-1" style="margin-top: 0.5rem;">
+          <span class="badge badge-live">Live</span>
+          <span style="font-size: 0.85rem; color: var(--color-text-muted); margin-left: 0.5rem;">Stack: Angular, Firebase</span>
+        </div>
         <div class="modal-hero-img fade-in-stagger delay-2">
           <img src="https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?auto=format&fit=crop&q=80&w=800" alt="Aura Kicks Sneakers" />
         </div>
@@ -275,6 +284,10 @@
       <div class="modal-page" id="modal-compuelectric">
         <button class="clickable back-btn fade-in-stagger delay-1" data-target="modal-gallery">← Volver a Galería</button>
         <h2 class="fade-in-stagger delay-1">CompuElectric</h2>
+        <div class="fade-in-stagger delay-1" style="margin-top: 0.5rem;">
+          <span class="badge badge-live">Live</span>
+          <span style="font-size: 0.85rem; color: var(--color-text-muted); margin-left: 0.5rem;">Stack: HTML, CSS, JS</span>
+        </div>
         <div class="modal-hero-img fade-in-stagger delay-2">
           <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=800" alt="CompuElectric" />
         </div>
@@ -292,6 +305,10 @@
       <div class="modal-page" id="modal-luxeestate">
         <button class="clickable back-btn fade-in-stagger delay-1" data-target="modal-gallery">← Volver a Galería</button>
         <h2 class="fade-in-stagger delay-1">LuxeEstate</h2>
+        <div class="fade-in-stagger delay-1" style="margin-top: 0.5rem;">
+          <span class="badge badge-study">Caso de Estudio</span>
+          <span style="font-size: 0.85rem; color: var(--color-text-muted); margin-left: 0.5rem;">Stack: React, Tailwind</span>
+        </div>
         <div class="modal-hero-img fade-in-stagger delay-2">
           <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&q=80&w=800" alt="LuxeEstate" />
         </div>
@@ -309,6 +326,10 @@
       <div class="modal-page" id="modal-dulcetierra">
         <button class="clickable back-btn fade-in-stagger delay-1" data-target="modal-gallery">← Volver a Galería</button>
         <h2 class="fade-in-stagger delay-1">Dulce Tierra</h2>
+        <div class="fade-in-stagger delay-1" style="margin-top: 0.5rem;">
+          <span class="badge badge-live">Live</span>
+          <span style="font-size: 0.85rem; color: var(--color-text-muted); margin-left: 0.5rem;">Stack: Angular</span>
+        </div>
         <div class="modal-hero-img fade-in-stagger delay-2">
           <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&q=80&w=800" alt="Dulce Tierra" />
         </div>
@@ -326,6 +347,10 @@
       <div class="modal-page" id="modal-polleria">
         <button class="clickable back-btn fade-in-stagger delay-1" data-target="modal-gallery">← Volver a Galería</button>
         <h2 class="fade-in-stagger delay-1">Pollería Suárez</h2>
+        <div class="fade-in-stagger delay-1" style="margin-top: 0.5rem;">
+          <span class="badge badge-live">Live</span>
+          <span style="font-size: 0.85rem; color: var(--color-text-muted); margin-left: 0.5rem;">Stack: Angular</span>
+        </div>
         <div class="modal-hero-img fade-in-stagger delay-2">
           <img src="https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?auto=format&fit=crop&q=80&w=800" alt="Pollería Suárez" />
         </div>
@@ -343,6 +368,10 @@
       <div class="modal-page" id="modal-origencafe">
         <button class="clickable back-btn fade-in-stagger delay-1" data-target="modal-gallery">← Volver a Galería</button>
         <h2 class="fade-in-stagger delay-1">Origen Café</h2>
+        <div class="fade-in-stagger delay-1" style="margin-top: 0.5rem;">
+          <span class="badge badge-study">Caso de Estudio</span>
+          <span style="font-size: 0.85rem; color: var(--color-text-muted); margin-left: 0.5rem;">Stack: HTML, CSS</span>
+        </div>
         <div class="modal-hero-img fade-in-stagger delay-2">
           <img src="https://images.unsplash.com/photo-1497935586351-b67a49e012bf?auto=format&fit=crop&q=80&w=800" alt="Origen Café" />
         </div>
@@ -360,6 +389,10 @@
       <div class="modal-page" id="modal-trabajo">
         <button class="clickable back-btn fade-in-stagger delay-1" data-target="modal-gallery">← Volver a Galería</button>
         <h2 class="fade-in-stagger delay-1">Portal de Empleos</h2>
+        <div class="fade-in-stagger delay-1" style="margin-top: 0.5rem;">
+          <span class="badge badge-live">Live</span>
+          <span style="font-size: 0.85rem; color: var(--color-text-muted); margin-left: 0.5rem;">Stack: Angular</span>
+        </div>
         <div class="modal-hero-img fade-in-stagger delay-2">
           <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&q=80&w=800" alt="Trabajo" />
         </div>
@@ -377,6 +410,10 @@
       <div class="modal-page" id="modal-pandemia">
         <button class="clickable back-btn fade-in-stagger delay-1" data-target="modal-gallery">← Volver a Galería</button>
         <h2 class="fade-in-stagger delay-1">Info Pandemia</h2>
+        <div class="fade-in-stagger delay-1" style="margin-top: 0.5rem;">
+          <span class="badge badge-opensource">Open Source</span>
+          <span style="font-size: 0.85rem; color: var(--color-text-muted); margin-left: 0.5rem;">Stack: HTML, CSS, JS</span>
+        </div>
         <div class="modal-hero-img fade-in-stagger delay-2">
           <img src="https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?auto=format&fit=crop&q=80&w=800" alt="Pandemia" />
         </div>
