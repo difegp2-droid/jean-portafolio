@@ -25,7 +25,21 @@
 
   <!-- Custom Cursor -->
   <div id="cursor-dot"></div>
-  <div id="cursor-ring"></div>
+  <div id="cursor-poly">
+    <svg viewBox="0 0 100 100" fill="none" stroke="rgba(255, 255, 255, 0.6)" stroke-width="2" stroke-linejoin="round">
+      <polygon points="50,5 89,27 89,72 50,95 11,72 11,27" />
+      <polygon points="50,25 75,65 25,65" />
+      <line x1="50" y1="5" x2="50" y2="25" />
+      <line x1="89" y1="27" x2="50" y2="25" />
+      <line x1="89" y1="27" x2="75" y2="65" />
+      <line x1="89" y1="72" x2="75" y2="65" />
+      <line x1="50" y1="95" x2="75" y2="65" />
+      <line x1="50" y1="95" x2="25" y2="65" />
+      <line x1="11" y1="72" x2="25" y2="65" />
+      <line x1="11" y1="27" x2="25" y2="65" />
+      <line x1="11" y1="27" x2="50" y2="25" />
+    </svg>
+  </div>
 
   <div id="app">
     <!-- Minimal Navbar -->

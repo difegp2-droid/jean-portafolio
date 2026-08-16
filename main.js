@@ -194,7 +194,7 @@ if (modalSystem) {
 // --- Custom Cursor Logic ---
 if (!isTouchDevice()) {
   const cursorDot = document.getElementById('cursor-dot');
-  const cursorRing = document.getElementById('cursor-ring');
+  const cursorPoly = document.getElementById('cursor-poly');
 
   let mouseX = 0, mouseY = 0;
   let ringX = 0, ringY = 0;
@@ -213,9 +213,9 @@ if (!isTouchDevice()) {
     ringX += (mouseX - ringX) * 0.15;
     ringY += (mouseY - ringY) * 0.15;
     
-    if (cursorRing) {
-      cursorRing.style.left = `${ringX}px`;
-      cursorRing.style.top = `${ringY}px`;
+    if (cursorPoly) {
+      cursorPoly.style.left = `${ringX}px`;
+      cursorPoly.style.top = `${ringY}px`;
     }
     
     requestAnimationFrame(animateCursor);
@@ -226,10 +226,10 @@ if (!isTouchDevice()) {
   const clickablesElements = document.querySelectorAll('a, button, .clickable');
   clickablesElements.forEach(el => {
     el.addEventListener('mouseenter', () => {
-      if (cursorRing) cursorRing.classList.add('hovering');
+      if (cursorPoly) cursorPoly.classList.add('hovering');
     });
     el.addEventListener('mouseleave', () => {
-      if (cursorRing) cursorRing.classList.remove('hovering');
+      if (cursorPoly) cursorPoly.classList.remove('hovering');
     });
   });
 }
