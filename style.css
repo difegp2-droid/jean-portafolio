@@ -345,7 +345,7 @@ body.wireframe-mode .glow {
 }
 
 .title {
-  font-size: 3.5rem;
+  font-size: clamp(2.5rem, 8vw, 3.5rem);
   font-weight: 800;
   line-height: 1.1;
   letter-spacing: -2px;
@@ -636,32 +636,65 @@ body, a, button, .clickable {
   #cursor-dot, #cursor-poly {
     display: none !important;
   }
+  /* Disable heavy spotlight rendering on touch devices */
+  .bento-card::before {
+    display: none;
+  }
 }
 
 /* RESPONSIVE */
 @media (max-width: 900px) {
   .bento-grid {
     grid-template-columns: 1fr;
+    gap: 1rem;
   }
   .col-span-2 { grid-column: span 1; }
   .row-span-2 { grid-row: span 1; }
-  .title { font-size: 3rem; }
-  .card-content { padding: 1.5rem; }
+  
+  .card-content { padding: 1.25rem; }
   .card-content.horizontal { 
     flex-direction: column; 
     align-items: flex-start;
   }
   .project-info-side {
-    padding: 1.5rem;
+    padding: 1.25rem;
   }
   .side-img { 
-    width: calc(100% - 3rem); 
-    height: 200px; 
-    margin: 0 1.5rem 1.5rem 1.5rem; 
-    border: 1px solid var(--glass-border); 
+    width: 100%; 
+    height: 200px;
   }
+
+  /* Floating Dock para Nav en Mobile */
   .bento-nav {
-    padding: 1.5rem 5%;
+    position: fixed;
+    bottom: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 400px;
+    background: rgba(10, 10, 10, 0.7);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--glass-border);
+    border-radius: 100px;
+    padding: 0.75rem 1rem;
+    margin: 0;
+    z-index: 1000;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  }
+  .logo {
+    display: none; /* Ocultar logo en el dock para ahorrar espacio */
+  }
+  .nav-actions {
+    width: 100%;
+    justify-content: space-around;
+  }
+  .nav-btn {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.85rem;
+  }
+  .vibe-text {
+    display: none; /* Ocultar el texto "Vibe" para ahorrar espacio */
   }
 }
 
