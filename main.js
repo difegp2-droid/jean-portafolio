@@ -359,15 +359,40 @@ if (scrambleElement) {
   scrambleElement.parentElement.addEventListener('mouseenter', scramble);
 }
 
-// 3. SPOTLIGHT HOVER (Glow reactivo en tarjetas)
+// 3. SPOTLIGHT HOVER & 3D TILT (Glow reactivo y rotación 3D)
 const bentoCards = document.querySelectorAll('.bento-card');
 bentoCards.forEach(card => {
   card.addEventListener('mousemove', e => {
     const rect = card.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
+    
+    // Spotlight update
     card.style.setProperty('--mouse-x', `${x}px`);
     card.style.setProperty('--mouse-y', `${y}px`);
+    
+    // 3D Tilt update (solo en PC)
+    if (!isTouchDevice()) {
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      const rotateX = ((y - centerY) / centerY) * -4; // Max rotación 4 grados
+      const rotateY = ((x - centerX) / centerX) * 4;
+      
+      card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+    }
+  });
+  
+  card.addEventListener('mouseleave', () => {
+    if (!isTouchDevice()) {
+      card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+      card.style.transition = `transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1)`;
+    }
+  });
+  
+  card.addEventListener('mouseenter', () => {
+    if (!isTouchDevice()) {
+      card.style.transition = `transform 0.1s ease`;
+    }
   });
 });
 
@@ -389,5 +414,69 @@ window.addEventListener('scroll', () => {
   if (noiseOverlay) {
     noiseOverlay.style.transform = `translateY(${scrollTop * 0.05}px)`;
   }
+});
+
+// ==========================================
+// FASE 5: BROCHE DE ORO
+// ==========================================
+
+// 1. PRELOADER CINEMATOGRÁFICO
+window.addEventListener('load', () => {
+  const preloader = document.getElementById('preloader');
+  if (preloader) {
+    setTimeout(() => {
+      preloader.style.transform = 'translateY(-100%)';
+      setTimeout(() => preloader.remove(), 600); // Remove from DOM after transition
+    }, 1200); // 1.2s delay for system boot effect
+  }
+});
+
+// 2. MÁQUINA DE ESCRIBIR (Typewriter)
+const typewriter = document.getElementById('typewriter');
+if (typewriter) {
+  const words = ['Frontend Developer', 'Estudiante en SENATI', 'Creador de Interfaces', 'Entusiasta UI/UX'];
+  let wordIndex = 0;
+  let charIndex = 0;
+  let isDeleting = false;
+
+  const type = () => {
+    const currentWord = words[wordIndex];
+    
+    if (isDeleting) {
+      typewriter.innerText = currentWord.substring(0, charIndex - 1);
+      charIndex--;
+    } else {
+      typewriter.innerText = currentWord.substring(0, charIndex + 1);
+      charIndex++;
+    }
+
+    let typeSpeed = isDeleting ? 50 : 100;
+
+    if (!isDeleting && charIndex === currentWord.length) {
+      typeSpeed = 2000; // Pause at the end of word
+      isDeleting = true;
+    } else if (isDeleting && charIndex === 0) {
+      isDeleting = false;
+      wordIndex = (wordIndex + 1) % words.length;
+      typeSpeed = 500; // Pause before new word
+    }
+
+    setTimeout(type, typeSpeed);
+  };
+  
+  // Start typewriter after preloader finishes
+  setTimeout(type, 2000);
+}
+
+// 3. EASTER EGG: TAB TITLE
+let originalTitle = document.title;
+window.addEventListener('blur', () => {
+  document.title = '¡Vuelve pronto! 💔';
+});
+window.addEventListener('focus', () => {
+  document.title = '¡Qué bueno verte! 👋';
+  setTimeout(() => {
+    document.title = originalTitle;
+  }, 2000);
 });
 
