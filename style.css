@@ -668,19 +668,21 @@ body, a, button, .clickable {
   .bento-nav {
     position: fixed;
     bottom: 1.5rem;
-    left: 50%;
-    transform: translateX(-50%);
+    left: 0;
+    right: 0;
+    margin: 0 auto !important; /* Centrado sin transform para evitar conflictos con .reveal */
     width: 90%;
     max-width: 400px;
-    background: rgba(10, 10, 10, 0.7);
+    background: rgba(10, 10, 10, 0.75);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     border: 1px solid var(--glass-border);
     border-radius: 100px;
-    padding: 0.75rem 1rem;
-    margin: 0;
+    padding: 0.75rem 1rem !important;
     z-index: 1000;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+    /* Forzar que las animaciones no rompan la posición */
+    transform: none !important; 
   }
   .logo {
     display: none; /* Ocultar logo en el dock para ahorrar espacio */
