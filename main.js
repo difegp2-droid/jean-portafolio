@@ -299,3 +299,95 @@ console.log(
   "background: #00ff88; color: #000; font-size: 20px; font-weight: bold; padding: 5px 10px; border-radius: 4px;", 
   "color: #00ff88; font-size: 14px;"
 );
+
+// ==========================================
+// FASE 3: MEJORAS ESTÉTICAS "ÉLITE"
+// ==========================================
+
+// 1. MAGNETIC BUTTONS (Botones Magnéticos)
+if (!isTouchDevice()) {
+  const magnetics = document.querySelectorAll('.magnetic');
+  magnetics.forEach(btn => {
+    btn.addEventListener('mousemove', (e) => {
+      const rect = btn.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+      btn.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
+    });
+    btn.addEventListener('mouseleave', () => {
+      btn.style.transform = `translate(0px, 0px)`;
+      btn.style.transition = `transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1)`;
+    });
+    btn.addEventListener('mouseenter', () => {
+      btn.style.transition = `transform 0.1s ease`;
+    });
+  });
+}
+
+// 2. TEXT SCRAMBLE EFFECT
+const scrambleElement = document.querySelector('.scramble-text');
+if (scrambleElement) {
+  const finalWord = scrambleElement.innerText;
+  const chars = '!<>-_\\\\/[]{}—=+*^?#________';
+  
+  const scramble = () => {
+    let iteration = 0;
+    scrambleElement.classList.add('glitch');
+    const interval = setInterval(() => {
+      scrambleElement.innerText = finalWord
+        .split('')
+        .map((letter, index) => {
+          if (index < iteration) {
+            return finalWord[index];
+          }
+          return chars[Math.floor(Math.random() * chars.length)];
+        })
+        .join('');
+      
+      if (iteration >= finalWord.length) {
+        clearInterval(interval);
+        scrambleElement.classList.remove('glitch');
+      }
+      iteration += 1 / 3;
+    }, 30);
+  };
+  
+  // Scramble on load
+  setTimeout(scramble, 1000);
+  
+  // Scramble on hover
+  scrambleElement.parentElement.addEventListener('mouseenter', scramble);
+}
+
+// 3. SPOTLIGHT HOVER (Glow reactivo en tarjetas)
+const bentoCards = document.querySelectorAll('.bento-card');
+bentoCards.forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    card.style.setProperty('--mouse-x', `${x}px`);
+    card.style.setProperty('--mouse-y', `${y}px`);
+  });
+});
+
+// 4. & 5. SCROLL PROGRESS BAR & NOISE REACTION
+const scrollProgress = document.getElementById('scroll-progress');
+const noiseOverlay = document.querySelector('.noise-overlay');
+
+window.addEventListener('scroll', () => {
+  const scrollTop = window.scrollY;
+  const docHeight = document.body.scrollHeight - window.innerHeight;
+  const scrollPercent = (scrollTop / docHeight) * 100;
+  
+  // Update progress bar
+  if (scrollProgress) {
+    scrollProgress.style.width = `${scrollPercent}%`;
+  }
+  
+  // Micro-transición de ruido (desplazamiento vertical leve según el scroll)
+  if (noiseOverlay) {
+    noiseOverlay.style.transform = `translateY(${scrollTop * 0.05}px)`;
+  }
+});
+

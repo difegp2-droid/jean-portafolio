@@ -21,6 +21,11 @@
 
 html {
   scroll-behavior: smooth;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+html::-webkit-scrollbar {
+  display: none;
 }
 
 body {
@@ -57,6 +62,19 @@ body {
   left: -10vw;
   z-index: -1;
   pointer-events: none;
+}
+
+/* SCROLL PROGRESS BAR */
+#scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 3px;
+  background: #00ff88;
+  z-index: 99999;
+  box-shadow: 0 0 10px rgba(0, 255, 136, 0.8);
+  transition: width 0.1s;
 }
 
 #app {
@@ -175,45 +193,43 @@ body {
 
 .bento-card {
   background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
+  border: 1px solid transparent;
   border-radius: 24px;
   overflow: hidden;
   position: relative;
-  display: flex;
-  flex-direction: column;
-  transition: border-color 0.4s ease, transform 0.1s ease-out;
-  transform-style: preserve-3d;
-  will-change: transform;
 }
 
-.bento-card:hover {
-  /* Removed static border hover */
-}
-
-/* Animación Continua de Borde (Sin Hover) */
-@property --angle {
-  syntax: '<angle>';
-  initial-value: 0deg;
-  inherits: false;
-}
-
-@keyframes spin-border {
-  to { --angle: 360deg; }
-}
-
+/* SPOTLIGHT HOVER EFFECT */
 .bento-card::before {
   content: "";
   position: absolute;
-  inset: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   border-radius: 24px;
-  padding: 1px;
-  background: conic-gradient(from var(--angle), transparent 70%, rgba(255, 255, 255, 0.7) 100%);
-  animation: spin-border 4s linear infinite;
+  padding: 1px; /* border width */
+  background: radial-gradient(
+    600px circle at var(--mouse-x) var(--mouse-y),
+    rgba(255, 255, 255, 0.4),
+    var(--glass-border) 40%
+  );
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
   pointer-events: none;
   z-index: 10;
+  opacity: 0.6;
+  transition: opacity 0.3s ease;
+}
+
+.bento-card:hover::before {
+  opacity: 1;
+}  display: flex;
+  flex-direction: column;
+  transition: border-color 0.4s ease, transform 0.1s ease-out;
+  transform-style: preserve-3d;
+  will-change: transform;
 }
 
 .card-content {
@@ -330,16 +346,22 @@ body.wireframe-mode .glow {
 }
 
 .title {
-  font-size: 4rem;
-  font-weight: 700;
-  line-height: 1;
+  font-size: 3.5rem;
+  font-weight: 800;
+  line-height: 1.1;
   letter-spacing: -2px;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
 }
 
 .title span {
   color: var(--color-text-muted);
-  font-weight: 400;
+}
+
+/* SCRAMBLE TEXT EFFECT */
+.scramble-text.glitch {
+  color: #00ff88;
+  text-shadow: 0 0 10px rgba(0, 255, 136, 0.8);
+}  font-weight: 400;
 }
 
 .hero-card .subtitle {
